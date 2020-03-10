@@ -55,3 +55,5 @@ C:\Users\Zawar\Desktop\New folder\NoteApp\NoteApp\obj\Debug\NoteApp.csproj.CoreC
 C:\Users\Zawar\Desktop\New folder\NoteApp\NoteApp\obj\Debug\NoteApp.csproj.CopyComplete
 C:\Users\Zawar\Desktop\New folder\NoteApp\NoteApp\obj\Debug\NoteApp.dll
 C:\Users\Zawar\Desktop\New folder\NoteApp\NoteApp\obj\Debug\NoteApp.pdb
+C:\Users\Zawar\Desktop\New folder\NoteApp\NoteApp\obj\Debug\NoteApp.Migrations.Note.resources
+C:\Users\Zawar\Desktop\New folder\NoteApp\NoteApp\obj\Debug\NoteApp.Migrations.ToDo.resources

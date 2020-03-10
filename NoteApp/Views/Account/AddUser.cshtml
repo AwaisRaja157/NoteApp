@@ -20,15 +20,15 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>UserName</label>
-                                            <input class="form-control" name="Username" type="text" placeholder="Enter UserName" />
+                                            <input class="form-control" name="Username" id="Username" type="text" placeholder="Enter UserName" />
                                         </div>
                                         <div class="form-group">
                                             <label>Email</label>
-                                            <input class="form-control" name="Email" type="text" placeholder="Enter your Email" />
+                                            <input class="form-control" name="Email" id="Email" type="text" placeholder="Enter your Email" />
                                         </div>
                                         <div class="form-group">
                                             <label>Password</label>
-                                            <input class="form-control" name="Password" type="password" placeholder="Enter your Password" />
+                                            <input class="form-control" name="Password" id="Password" type="password" placeholder="Enter your Password" />
                                         </div>
                                         <div class="form-group">
                                             <label>ConfirmPassword</label>
@@ -39,7 +39,7 @@
                             </div>
                             <div class="panel-footer">
                                 <div class="pull-right" style="margin-left:280px">
-                                    <button class="btn btn-primary" type="submit">Submit</button>
+                                    <button class="btn btn-primary" id="SubmitBtn" type="button">Submit</button>
                                 </div>
                             </div>
                             <div class="col-md-3"></div>
@@ -60,3 +60,31 @@
         </section>
     </div>
 </div>
+
+
+
+@section scripts{
+<script>
+
+    $("#SubmitBtn").click(function () {
+
+        var user = {
+            Username: $("#Username").val(),
+            Email: $("#Email").val(),
+            Password: $("#Password").val()
+        }
+
+        $.post("@Url.Action("AddUser","Account")", { User: user }, function (resp) {
+            if (resp == true) {
+                alert("Successfully added");
+            } else {
+                alert("unable to add user");
+            }
+        });
+
+
+    });
+
+
+</script>    
+}

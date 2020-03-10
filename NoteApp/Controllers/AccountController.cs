@@ -9,7 +9,7 @@ namespace NoteApp.Controllers
 {
     public class AccountController : Controller
     {
-        
+
         public ActionResult Index()
         {
             return View();
@@ -18,7 +18,7 @@ namespace NoteApp.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-           
+
             return View();
         }
 
@@ -34,8 +34,8 @@ namespace NoteApp.Controllers
 
                 }
             }
-            
-            return RedirectToAction("Dashboard","Dashboard");
+
+            return RedirectToAction("Dashboard", "Dashboard");
         }
 
         [HttpGet]
@@ -47,7 +47,7 @@ namespace NoteApp.Controllers
         [HttpPost]
         public ActionResult Register(User user)
         {
-            using(var Context = new NoteAppContext())
+            using (var Context = new NoteAppContext())
             {
                 Context.Users.Add(user);
                 Context.SaveChanges();
@@ -84,39 +84,50 @@ namespace NoteApp.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult AddUser(User user)
+        public JsonResult AddUser(User user)
         {
-            using(var Context = new NoteAppContext())
+            try
             {
-                if (user.ID == 0)
+
+                using (var Context = new NoteAppContext())
                 {
-                    Context.Users.Add(user);
+                    if (user.ID == 0)
+                    {
+                        Context.Users.Add(user);
+                    }
+                    else
+                    {
+                        var us = Context.Users.Where(x => x.ID == user.ID).FirstOrDefault();
+                        us.UserName = us.UserName;
+                        us.Email = us.Email;
+                        us.Password = us.Password;
+                        us.ConfirmPassword = us.ConfirmPassword;
+                    }
+                    Context.SaveChanges();
+
                 }
-                else
-                {
-                    var us = Context.Users.Where(x => x.ID == user.ID).FirstOrDefault();
-                    us.UserName = us.UserName;
-                    us.Email = us.Email;
-                    us.Password = us.Password;
-                    us.ConfirmPassword = us.ConfirmPassword;
-                }
-                Context.SaveChanges();
+                return Json(true);
 
             }
-           
-            return RedirectToAction("AddUser", "Account");
+            catch (Exception ex)
+            {
+
+                return Json(false);
+
+            }
         }
         [HttpPost]
         public ActionResult DeleteUser(int ID)
-        {using (var Context = new NoteAppContext())
+        {
+            using (var Context = new NoteAppContext())
             {
                 var us = Context.Users.Where(x => x.ID == ID).FirstOrDefault();
                 Context.Users.Remove(us);
                 Context.SaveChanges();
             }
-                return RedirectToAction("GetUserList", "Account");
+            return RedirectToAction("GetUserList", "Account");
         }
 
-       
+
     }
 }
