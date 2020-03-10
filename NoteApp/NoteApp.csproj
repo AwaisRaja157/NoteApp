@@ -121,6 +121,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
+    <Compile Include="Controllers\NotesController.cs" />
+    <Compile Include="Controllers\ToDoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -128,7 +130,17 @@
     <Compile Include="Migrations\202002041409122_User.designer.cs">
       <DependentUpon>202002041409122_User.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003051044599_Note.cs" />
+    <Compile Include="Migrations\202003051044599_Note.designer.cs">
+      <DependentUpon>202003051044599_Note.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003051416468_ToDo.cs" />
+    <Compile Include="Migrations\202003051416468_ToDo.designer.cs">
+      <DependentUpon>202003051416468_ToDo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ToDo.cs" />
+    <Compile Include="Models\Note.cs" />
     <Compile Include="Models\NoteAppContext.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -147,6 +159,10 @@
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
     <Content Include="Views\Account\GetUserList.cshtml" />
     <Content Include="Views\Account\AddUser.cshtml" />
+    <Content Include="Views\Notes\AddNotes.cshtml" />
+    <Content Include="Views\Notes\GetNotesList.cshtml" />
+    <Content Include="Views\ToDo\AddToDo.cshtml" />
+    <Content Include="Views\ToDo\GetToDoList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -160,6 +176,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202002041409122_User.resx">
       <DependentUpon>202002041409122_User.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003051044599_Note.resx">
+      <DependentUpon>202003051044599_Note.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003051416468_ToDo.resx">
+      <DependentUpon>202003051416468_ToDo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

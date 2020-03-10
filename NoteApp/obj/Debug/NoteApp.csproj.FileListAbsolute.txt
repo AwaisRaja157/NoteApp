@@ -26,3 +26,5 @@ c:\users\muhammad awais\source\repos\NoteApp\NoteApp\obj\Debug\NoteApp.dll
 c:\users\muhammad awais\source\repos\NoteApp\NoteApp\obj\Debug\NoteApp.pdb
 c:\users\muhammad awais\source\repos\NoteApp\NoteApp\obj\Debug\NoteApp.Migrations.User.resources
 c:\users\muhammad awais\source\repos\NoteApp\NoteApp\obj\Debug\NoteApp.csproj.GenerateResource.Cache
+C:\Users\Muhammad Awais\source\repos\NoteApp\NoteApp\obj\Debug\NoteApp.Migrations.Note.resources
+C:\Users\Muhammad Awais\source\repos\NoteApp\NoteApp\obj\Debug\NoteApp.Migrations.ToDo.resources
