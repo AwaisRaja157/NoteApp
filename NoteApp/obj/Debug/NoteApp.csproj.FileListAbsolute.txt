@@ -57,3 +57,5 @@ C:\Users\Zawar\Desktop\New folder\NoteApp\NoteApp\obj\Debug\NoteApp.dll
 C:\Users\Zawar\Desktop\New folder\NoteApp\NoteApp\obj\Debug\NoteApp.pdb
 C:\Users\Zawar\Desktop\New folder\NoteApp\NoteApp\obj\Debug\NoteApp.Migrations.Note.resources
 C:\Users\Zawar\Desktop\New folder\NoteApp\NoteApp\obj\Debug\NoteApp.Migrations.ToDo.resources
+C:\Users\Muhammad Awais\source\repos\NoteApp\NoteApp\obj\Debug\NoteApp.Migrations.Note.resources
+C:\Users\Muhammad Awais\source\repos\NoteApp\NoteApp\obj\Debug\NoteApp.Migrations.ToDo.resources
