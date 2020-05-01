@@ -57,6 +57,14 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -66,6 +74,12 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -103,6 +117,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\136-1366211_group-of-10-guys-login-user-icon-png.png" />
+    <Content Include="Images\download.jpg" />
+    <Content Include="Images\notes.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -121,6 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
     <Compile Include="Controllers\NotesController.cs" />
@@ -128,19 +146,24 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202002041409122_User.cs" />
-    <Compile Include="Migrations\202002041409122_User.designer.cs">
-      <DependentUpon>202002041409122_User.cs</DependentUpon>
+    <Compile Include="Migrations\202003231729018_NoteFile.cs" />
+    <Compile Include="Migrations\202003231729018_NoteFile.designer.cs">
+      <DependentUpon>202003231729018_NoteFile.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003051044599_Note.cs" />
-    <Compile Include="Migrations\202003051044599_Note.designer.cs">
-      <DependentUpon>202003051044599_Note.cs</DependentUpon>
+    <Compile Include="Migrations\202003261921029_Note1.cs" />
+    <Compile Include="Migrations\202003261921029_Note1.designer.cs">
+      <DependentUpon>202003261921029_Note1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003051416468_ToDo.cs" />
-    <Compile Include="Migrations\202003051416468_ToDo.designer.cs">
-      <DependentUpon>202003051416468_ToDo.cs</DependentUpon>
+    <Compile Include="Migrations\202004011918573_Note11.cs" />
+    <Compile Include="Migrations\202004011918573_Note11.designer.cs">
+      <DependentUpon>202004011918573_Note11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004011922244_NoteFile1.cs" />
+    <Compile Include="Migrations\202004011922244_NoteFile1.designer.cs">
+      <DependentUpon>202004011922244_NoteFile1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\NoteFile.cs" />
     <Compile Include="Models\ToDo.cs" />
     <Compile Include="Models\Note.cs" />
     <Compile Include="Models\NoteAppContext.cs" />
@@ -174,20 +197,24 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202002041409122_User.resx">
-      <DependentUpon>202002041409122_User.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003051044599_Note.resx">
-      <DependentUpon>202003051044599_Note.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003051416468_ToDo.resx">
-      <DependentUpon>202003051416468_ToDo.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="Files\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202003231729018_NoteFile.resx">
+      <DependentUpon>202003231729018_NoteFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003261921029_Note1.resx">
+      <DependentUpon>202003261921029_Note1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004011918573_Note11.resx">
+      <DependentUpon>202004011918573_Note11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004011922244_NoteFile1.resx">
+      <DependentUpon>202004011922244_NoteFile1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

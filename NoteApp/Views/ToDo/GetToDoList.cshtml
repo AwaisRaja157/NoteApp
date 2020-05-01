@@ -10,7 +10,7 @@
         <section class="col-lg-12 connectedSortable ui-sortable">
             <div class="card">
                 <br />
-                <h2 style="margin-left:500px">ToDo List</h2>
+                <h2 style="margin-left:400px">ToDo List</h2>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -30,10 +30,9 @@
                                             <td>@element.Title</td>
                                             <td>@element.Description</td>
                                             <td>@element.Date</td>
-
                                             <td>
                                                 <a href="@Url.Action("GetToDoList","ToDo", new { ID = element.ID })"><i class="glyph-icon glyphicon-pencil">Edit</i></a>
-                                                <a href="@Url.Action("DeleteToDo","ToDo", new { ID = element.ID })"><i class="glyph-icon icon-trash text-danger">Delete</i></a>
+                                                <a href="@Url.Action("DeleteToDo","ToDo", new {ID = element.ID })"><i class="glyphicon glyphicon-trash text-danger">Delete</i></a>
                                             </td>
                                         </tr>
                                      }

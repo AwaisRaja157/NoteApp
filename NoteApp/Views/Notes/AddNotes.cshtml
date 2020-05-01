@@ -1,4 +1,4 @@
-﻿
+﻿@model NoteApp.Models.Note
 @{
     ViewBag.Title = "AddNotes";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,7 +8,8 @@
     <div class="row">
         <section class="col-md-12 connectedSortable ui-sortable">
             <div class="card">
-                <h2 style="margin-left:500px">Add Notes</h2>
+                <br />
+                <h2 style="margin-left:400px">Add Notes</h2>
                 <div class="card-body">
                     <div class="panel panel-primary">
                         <form action="@Url.Action("AddNotes","Notes")" method="post">
@@ -18,18 +19,22 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Title</label>
-                                            <input class="form-control" name="Title" type="text" placeholder="Enter the Title" />
+                                            <input class="form-control" name="Title" id="Title" type="text" placeholder="Enter the Title"/>
                                         </div>
                                         <div class="form-group">
                                             <label>Description</label>
-                                            <input class="form-control" name="Description" type="text" placeholder="Enter your Description" />
+                                            <input class="form-control" name="Description" id="Description" type="text" placeholder="Enter your Description" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>File</label>
+                                            <input class="form-control" name="File" id="File" type="file" multiple />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="panel-footer">
-                                <div class="pull-right" style="margin-left:280px">
-                                    <button class="btn btn-primary" type="submit">Submit</button>
+                                <div class="pull-right" style="margin-left:250px">
+                                    <button class="btn btn-primary" id="SubmitBtn" type="button">Submit</button>
                                 </div>
                             </div>
                             <div class="col-md-3"></div>
@@ -51,3 +56,138 @@
     </div>
 </div>
 
+@section scripts{
+<script>
+
+  $("#SubmitBtn").click(function () {
+      var note = {
+          Title: $("#Title").val(),
+          Description: $("#Description").val()
+      }
+
+      //var formData = new FormData();
+      ////$('#file')[0].files[0]
+      //var Images = $("#ImageFile")[0].Imagefile;
+      //console.log(Images);
+      //debugger;
+      //for (var i = 0; i < Images.length; i++) {
+      //    formData.append("Images", Images[i]);
+      //}
+
+        var formData = new FormData();
+      //$('#file')[0].files[0]
+            var Files = $("#File")[0].files;
+            console.log(Files);
+            debugger;
+            for (var i = 0; i < Files.length; i++) {
+                formData.append("Files", Files[i]);
+            }
+
+     $.post("@Url.Action("AddNotes","Notes")", { Note: note }, function (resp) {
+
+         if (resp) {
+             formData.append("noteId", resp);
+             $.ajax({
+                 url: "@Url.Action("AddFiles", "Notes")",
+                 data: formData,
+                 processData: false,
+                 contentType: false,
+                 type: "POST",
+                 success: function (data) {
+
+
+
+                 }
+
+             });
+
+            $.toast({
+                 heading: 'Success',
+                 text: 'Successfully Added notes',
+                 icon: 'success',
+                 position: 'top-right',
+            })
+            }
+           else {
+            $.toast({
+              heading: 'Error',
+              text: 'Unable to Add Notes',
+              icon: 'error',
+              position: 'top-right',
+
+            })
+         }
+
+    });
+       
+       $.post("@Url.Action("AddNotes","Notes")", { Note: note }, function (resp) {
+
+         if (resp) {
+             formData.append("noteId", resp);
+             $.ajax({
+                 url: "@Url.Action("AddFiles", "Notes")",
+                 data: formData,
+                 processData: false,
+                 contentType: false,
+                 type: "POST",
+                 success: function (data) {
+
+
+
+                 }
+
+             });
+         }
+
+       });
+
+  });
+
+                      @*for (var i = 0; i != vm.ImageFiles.length; i++) {
+                            formData.append("ImageFiles", vm.ImageFiles[i]);
+                      }
+                        Product.ImagePaths = "";
+                        formData.append("ProductID", resp.ID);
+                        $.ajax({
+                            xhr: function () {
+                                var xhr = new window.XMLHttpRequest();
+                                xhr.upload.addEventListener("progress", function (evt) {
+                                    if (evt.lengthComputable) {
+                                        var percentComplete = evt.loaded / evt.total;
+                                        //Do something with upload progress
+                                        console.log(percentComplete);
+                                        vm.UploadProgress = percentComplete*100;
+                                    }
+                                }, false);
+                                return xhr;
+                            },
+                            url: "@Url.Action("AddNotes", "Notes")",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            type: "POST",
+                            success: function (data) {
+                                vm.UploadInProgress = false;
+                                vm.UploadProgress = 0;
+                                swal({
+                                    html: true,
+                                    title: "Information",
+                                    text: "Product Saved Successfully, Now you can Add Variations",
+                                    type: "info",
+                                    confirmButtonText: "Ok"
+                                }, function () {
+                                    if (!window.location.href.endsWith(resp.ID)) {
+                                        window.location.href = window.location.href + "/" + resp.ID;
+                                    } else {
+                                        window.location.reload();
+                                        }
+                                    });
+                            },
+                            error: function () {
+                                vm.UploadInProgress = false;
+                                vm.UploadProgress = 0;
+                            }
+                        });*@
+
+</script>
+}

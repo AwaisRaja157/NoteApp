@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
+
 
 namespace NoteApp.Controllers
 {
@@ -22,14 +24,16 @@ namespace NoteApp.Controllers
             }
             return View();
         }
+
         [HttpPost]
-        public ActionResult AddNotes(Note note)
+        public JsonResult AddNotes(Note note)
         {
             using (var Context = new NoteAppContext())
             {
                 if (note.ID == 0)
                 {
                     Context.Notes.Add(note);
+
                 }
                 else
                 {
@@ -37,23 +41,66 @@ namespace NoteApp.Controllers
                     not.ID = not.ID;
                     not.Title = not.Title;
                     not.Description = not.Description;
+
                 }
-               
+
                 Context.SaveChanges();
             }
-            return RedirectToAction("AddNotes","Notes");
+            return Json(note.ID);
         }
+
         [HttpPost]
-        public ActionResult DeleteNotes(int ID)
+        public ActionResult AddFiles(List<HttpPostedFileBase> files, int noteId)
         {
-            using (var context = new NoteAppContext())
+            try
             {
-                var note = context.Notes.Where(x => x.ID == ID).FirstOrDefault();
-                context.Notes.Remove(note);
-                context.SaveChanges();
+                if (files != null)
+                {
+                    List<string> file = new List<string>();
+                    string path = Server.MapPath("~/Files/");
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+
+                    foreach (var item in files)
+                    {
+                        item.SaveAs(path + Path.GetFileName(item.FileName));
+
+                        ViewBag.Message = "File uploaded successfully.";
+                        string savelocation = "~/Files/" + Path.GetFileName(item.FileName);
+                        file.Add(savelocation);
+
+                    }
+
+                    foreach (var item in file)
+                    {
+                        NoteFile noteFile = new NoteFile();
+                        noteFile.NoteID = noteId;
+                        noteFile.Filepath = item;
+                        using (var context = new NoteAppContext())
+                        {
+                            context.NoteFiles.Add(noteFile);
+                            context.SaveChanges();
+
+                        }
+                    }
+
+
+                }
+
+
             }
-            return RedirectToAction("AddNotes", "Notes");
+
+            catch (Exception ex)
+
+            {
+
+            }
+
+            return View();
         }
+
         [HttpGet]
         public ActionResult GetNotesList()
         {
@@ -64,5 +111,19 @@ namespace NoteApp.Controllers
             }
             return View(notes);
         }
+
+
+        public ActionResult DeleteNotes(int ID)
+        {
+            using (var context = new NoteAppContext())
+            {
+                var note = context.Notes.Where(x => x.ID == ID).FirstOrDefault();
+                context.Notes.Remove(note);
+                context.SaveChanges();
+            }
+
+            return RedirectToAction("GetNotesList", "Notes");
+        }
+
     }
 }

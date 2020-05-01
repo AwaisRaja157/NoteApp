@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -18,7 +19,6 @@ namespace NoteApp.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-
             return View();
         }
 
@@ -38,6 +38,14 @@ namespace NoteApp.Controllers
             return RedirectToAction("Dashboard", "Dashboard");
         }
 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult LogOff()
+        //{
+        //    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+        //    return RedirectToAction("Index", "Home");
+        //}
+
         [HttpGet]
         public ActionResult Register()
         {
@@ -53,7 +61,7 @@ namespace NoteApp.Controllers
                 Context.SaveChanges();
 
             }
-            return RedirectToAction("Register", "Account");
+            return RedirectToAction("Login", "Account");
         }
 
         [HttpGet]
@@ -116,7 +124,7 @@ namespace NoteApp.Controllers
 
             }
         }
-        [HttpPost]
+       
         public ActionResult DeleteUser(int ID)
         {
             using (var Context = new NoteAppContext())

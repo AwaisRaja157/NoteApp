@@ -1,4 +1,4 @@
-﻿
+﻿@model NoteApp.Models.ToDo
 @{
     ViewBag.Title = "AddToDo";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,7 +8,8 @@
     <div class="row">
         <section class="col-md-12 connectedSortable ui-sortable">
             <div class="card">
-                <h2 style="margin-left:500px">Add ToDo</h2>
+                <br />
+                <h2 style="margin-left:400px">Add ToDo</h2>
                 <div class="card-body">
                     <div class="panel panel-primary">
                         <form action="@Url.Action("AddToDo","ToDo")" method="post">
@@ -18,22 +19,22 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Title</label>
-                                            <input class="form-control" name="Title" type="text" placeholder="Enter the Title" />
+                                            <input class="form-control" name="Title" id="Title" type="text" placeholder="Enter the Title" />
                                         </div>
                                         <div class="form-group">
                                             <label>Description</label>
-                                            <input class="form-control" name="Description" type="text" placeholder="Enter your Description" />
+                                            <input class="form-control" name="Description" id="Description" type="text" placeholder="Enter your Description" />
                                         </div>
                                         <div class="form-group">
                                             <label>Date</label>
-                                            <input class="form-control" name="Date" type="date" placeholder="Enter your Description" />
+                                            <input class="form-control" name="Date" id="Date" type="date" placeholder="Enter your Description" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="panel-footer">
-                                <div class="pull-right" style="margin-left:280px">
-                                    <button class="btn btn-primary" type="submit">Submit</button>
+                                <div class="pull-right" style="margin-left:250px">
+                                    <button class="btn btn-primary" id="SubmitBtn" type="submit">Submit</button>
                                 </div>
                             </div>
                             <div class="col-md-3"></div>
@@ -55,3 +56,32 @@
     </div>
 </div>
 
+@section scripts{
+    <script>
+        $("#SubmitBtn").click(function () {
+            var todo = {
+                Title: $("#Title").val(),
+                Description: $("#Description").val(),
+                Date: $("#Date").val()
+            }
+
+            $.post("@Url.Action("AddToDo","ToDo")", { ToDo: todo }, function (resp) {
+                if (resp == true) {
+                    alert("Todo successfully added");
+                }
+                else {
+                    alert("unable to add Todo");
+                }
+
+            })
+
+
+
+
+        })
+
+  
+    
+    </script>
+
+}

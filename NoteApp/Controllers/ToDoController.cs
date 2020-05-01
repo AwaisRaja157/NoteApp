@@ -24,7 +24,7 @@ namespace NoteApp.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult AddToDo(ToDo todo)
+        public JsonResult AddToDo(ToDo todo)
         {
             using (var context = new NoteAppContext())
             {
@@ -42,28 +42,30 @@ namespace NoteApp.Controllers
                 
                 context.SaveChanges();
             }
-            return RedirectToAction("AddToDO", "ToDo");
+            return Json(true);
         }
-        [HttpPost]
+ 
+        [HttpGet]
+        public ActionResult GetToDoList()
+        {
+            List<ToDo> todos = new List<ToDo>();
+            using (var Context = new NoteAppContext())
+            {
+                todos = Context.ToDoS.ToList();
+            }
+            return View(todos);
+        }
+
+     
         public ActionResult DeleteToDo(int ID)
         {
             using (var context = new NoteAppContext())
             {
-               var todo = context.ToDoS.Where(x => x.ID == ID).FirstOrDefault();
+                var todo = context.ToDoS.Where(x => x.ID == ID).FirstOrDefault();
                 context.ToDoS.Remove(todo);
             }
 
             return RedirectToAction("GetToDoList", "ToDo");
-        }
-        [HttpGet]
-        public ActionResult GetToDoList()
-        {
-            List<ToDo> todo = new List<ToDo>();
-            using (var Context = new NoteAppContext())
-            {
-                todo = Context.ToDoS.ToList();
-            }
-            return View(todo);
         }
     }
 }

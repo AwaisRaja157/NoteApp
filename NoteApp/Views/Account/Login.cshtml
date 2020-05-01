@@ -6,7 +6,9 @@
 
 <div class="login-box">
     <div class="login-logo">
-        <a href="../../index2.html"><b>Login</b></a>
+        
+        <img src="~/Images/download.jpg" height="100" width="100" />
+        @*<a href="../../index2.html"><b>Login</b></a>*@
     </div>
     <!-- /.login-logo -->
     <div class="card">
@@ -45,20 +47,20 @@
                     <!-- /.col -->
                 </div>
             </form>
-            <div class="social-auth-links text-center mb-3">
+            @*<div class="social-auth-links text-center mb-3">
                 <a href="#" class="btn btn-block btn-primary">
                     <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
                 </a>
                 <a href="#" class="btn btn-block btn-danger">
                     <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
                 </a>
-            </div>
+            </div>*@
             <!-- /.social-auth-links -->
             <p class="mb-1">
-                <a href="forgot-password.html">I forgot my password</a>
+                <a href="@Url.Action("Register","Account")">I forgot my password</a>
             </p>
             <p class="mb-0">
-                <a href="http://localhost:56086/Account/Register" class="text-center">Register a new membership</a>
+                <a href="@Url.Action("Register","Account")" class="text-center">Register a new membership</a>
             </p>
         </div>
         <!-- /.login-card-body -->
